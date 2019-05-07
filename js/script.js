@@ -3,8 +3,8 @@ $(document).ready(function(){
   //randomPosition
   function randomPosition(){
 
-    var h = $(window).height() - 20;
-    var w = $(window).width() - 20;
+    var h = $(window).height() - 100;
+    var w = $(window).width() - 100;
 
     var nh = Math.floor(Math.random() * h);
     var nw = Math.floor(Math.random() * w);
