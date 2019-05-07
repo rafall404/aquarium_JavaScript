@@ -2,6 +2,8 @@ $(document).ready(function(){
 
   animateDiv("#fish1Id");
   animateDiv("#fish2Id");
+  animateDiv("#divingman");
+  animateTurtle("#turtle");
   animateBubbles("#bubble1Id");
   animateBubbles("#bubble2Id");
   animateBubbles("#bubble3Id");
@@ -21,13 +23,18 @@ $(document).ready(function(){
     animateDiv("#fish1Id");
   });
 
+
     $("#fish1Id").on('dblclick', function(){
-      $("#fish1Id").stop(true);
       console.log('suka');
-      $("#fish1Id").css({"height": "500px","width": "500px"}).delay(3000)
+      $("#fish1Id").css({"height": "500px","width": "500px"})
+        settimeout(function(){
+          $("#fish1Id").css({"height": "250px", "width": "250px"}, )
+        }, 3000)
+        animateDiv("#fish1Id");
 
     });
 
+//randomStartPossition
     function getRandomStartPosBottom(itemId){
     var offsetW = $(itemId).innerWidth();
     var w = $(window).width() - offsetW;
@@ -35,7 +42,7 @@ $(document).ready(function(){
     return nw;
 }
 
-
+//bubbleAnimation
     var bubbleAnimationTime = 13000;
 function animateBubbles(itemId){
     var sw = getRandomStartPosBottom(itemId);
@@ -54,23 +61,71 @@ function animateBubbles(itemId){
     });
 }
 
+
+// divingmanAnimation
+
+var divingman = '<img id="divingman" src="images/divingman.png" />';
+$('body').append(divingman);
+
+
+$(document).keydown(function(e){
+  console.log(e.which);
+  switch (e.which){
+    case 37:
+    $("#divingman").css({"transform": "rotate(0deg)"})
+      $("#divingman").animate({left: "-=100px"});
+      break;
+    case 39:
+    $("#divingman").css({"-webkit-transform": "scaleY(-1)", "transform": "scaleX(-1)"})
+      $('#divingman').animate({left: "+=100px"});
+      break;
+    case 38:
+    $("#divingman").css({"transform": "rotate(90deg)"})
+    $('#divingman').animate({top: "-=100px"});
+      break;
+    case 40:
+    $("#divingman").css({"transform": "rotate(-90deg)"})
+    $('#divingman').animate({top: "+=100px"});
+      break;
+  }
 })
 
+// CSS
 
-  function randomPosition(){
+$("#divingman").css({"height": "300px", "width": "300px"})
+$("#turtle").css({"height": "300px", "width": "300px"})
 
-    var h = $(window).height() - 20;
-    var w = $(window).width() - 20;
+//randomPositon
+function randomPosition(){
 
-    var nh = Math.floor(Math.random() * h);
-    var nw = Math.floor(Math.random() * w);
+  var h = $(window).height() - 20;
+  var w = $(window).width() - 20;
 
-    return [nh,nw];
+  var nh = Math.floor(Math.random() * h);
+  var nw = Math.floor(Math.random() * w);
+
+  return [nh,nw];
 }
 
+//randomAnimateFish
 function animateDiv(myClass){
-    var newq = randomPosition();
-    $(myClass).animate({ top: newq[0], left: newq[1] }, 2000,   function(){
-      animateDiv(myClass);
-    });
-  }
+  var newq = randomPosition();
+  $(myClass).animate({ top: newq[0], left: newq[1] }, 2000,   function(){
+    animateDiv(myClass);
+  });
+}
+
+//randomAnimateTurtle
+
+var turtle = '<img id="turtle" src="images/turtle.png" />';
+$('body').append(turtle);
+
+function animateTurtle(myClass2){
+  var newq = randomPosition();
+  $(myClass2).animate({ top: newq[0], left: newq[1] }, 5000,   function(){
+    animateTurtle(myClass2);
+  });
+}
+
+
+})
