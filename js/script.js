@@ -45,7 +45,6 @@ function getRandomStartPosBottom(itemId){
 }
 
 //bubbleAnimation
-// var bubbleAnimationTime = 13000;
 function animateBubbles(itemId, time){
     var sw = getRandomStartPosBottom(itemId);
     var sh = $(window).height();
@@ -63,9 +62,7 @@ function animateBubbles(itemId, time){
     });
 }
 
-
 // divingmanAnimation
-
 var divingman = '<img id="divingman" src="images/divingman.png" />';
 $('body').append(divingman);
 $("#divingman").css({"height": "300px", "width": "300px"})
