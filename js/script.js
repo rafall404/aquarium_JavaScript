@@ -17,27 +17,27 @@ $(document).ready(function(){
     $("#fish2Id").stop(true);
     [randomHeight, randomWidth] = randomPosition();
     $('#fish2Id').animate({top: randomHeight, left: randomWidth});
-    animateDiv("#fish2Id", 5000);
+    animateFish("#fish2Id", 5000);
   });
 
   $(document).click(function (event) {
     $("#fish1Id").stop(true);
     $("#fish1Id").animate({left: event.pageX - 100, top: event.pageY - 100}, 700);
-    animateDiv("#fish1Id", 5000);
+    animateFish("#fish1Id", 5000);
   });
 
 
     $("#fish1Id").on('dblclick', function(){
       $(this).stop(true);
       $("#fish1Id").animate({"height": "500px","width": "500px"})
-        .delay(2000)
+        .delay(1000)
         .animate({"height": "250px", "width": "250px"}, function() {
-            animateDiv("#fish1Id", 5000);
+            animateFish("#fish1Id", 5000);
           });
     });
 
 //randomStartPossition
-function getRandomStartPosBottom(itemId){
+function bubblesStartPosition(itemId){
     var offsetW = $(itemId).innerWidth();
     var w = $(window).width() - offsetW;
     var nw = Math.floor(Math.random() * w);
@@ -46,7 +46,7 @@ function getRandomStartPosBottom(itemId){
 
 //bubbleAnimation
 function animateBubbles(itemId, time){
-    var sw = getRandomStartPosBottom(itemId);
+    var sw = bubblesStartPosition(itemId);
     var sh = $(window).height();
     $(itemId).offset({top: sh, left: sw})
     $(itemId).animate({ top: -100}, time, function(){
@@ -95,7 +95,7 @@ $(document).keydown(function(e){
 
 
 //randomAnimateFish
-function animateDiv(id, speed){
+function animateFish(id, speed){
   var newq = randomPosition();
 
   var dir = $(id).offset().left < newq[1] ? 1 : -1;
@@ -104,7 +104,7 @@ function animateDiv(id, speed){
           top: newq[0],
           left: newq[1],
         }, speed, function() {
-    animateDiv(id, speed);
+    animateFish(id, speed);
   });
 }
 
@@ -115,11 +115,11 @@ $('body').append(turtle);
 $("#turtle").css({"height": "300px", "width": "300px"})
 
 
-  animateDiv("#fish1Id", 2000);
-  animateDiv("#fish2Id", 2000);
-  animateDiv("#turtle", 5000);
-  animateBubbles("#bubble1Id", 2000);
+  animateFish("#fish1Id", 2000);
+  animateFish("#fish2Id", 2000);
+  animateFish("#turtle", 5000);
+  animateBubbles("#bubble1Id", 7000);
   animateBubbles("#bubble2Id", 5000);
-  animateBubbles("#bubble3Id", 3000);
+  animateBubbles("#bubble3Id", 6000);
 
 })
